@@ -11,7 +11,8 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div>
-      <h1>Welcome to Remix</h1>
+      <h1>Welcome to Remix!</h1>
+      <img src="/images/react.svg" alt="react logo" width={100}/>
       <ul>
         <li>
           <Link to="/about">About</Link>
