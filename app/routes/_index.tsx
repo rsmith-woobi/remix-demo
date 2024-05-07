@@ -1,5 +1,5 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
+import { Form, Link, json, useActionData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,17 +8,29 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export async function action({ request }: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const name = formData.get("name")?.toString() || "";
+  return json({ name });
+}
+
 export default function Index() {
+  const data = useActionData<typeof action>();
   return (
     <div>
       <h1>Welcome to Remix!</h1>
       <h2>Deployed into a client account with Appius, again!</h2>
-      <img src="/images/react.svg" alt="react logo" width={100}/>
+      <img src="/images/react.svg" alt="react logo" width={100} />
       <ul>
         <li>
           <Link to="/about">About</Link>
         </li>
       </ul>
+      <Form method="post">
+        <input type="text" name="name" placeholder="Name" />
+        <button type="submit">Submit</button>
+      </Form>
+      {data?.name && <p>{data?.name}</p>}
     </div>
   );
 }
