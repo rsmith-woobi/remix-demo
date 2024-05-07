@@ -1,5 +1,11 @@
 import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, Link, json, useActionData } from "@remix-run/react";
+import {
+  Form,
+  Link,
+  json,
+  useActionData,
+  useLoaderData,
+} from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -14,8 +20,13 @@ export async function action({ request }: ActionFunctionArgs) {
   return json({ name });
 }
 
+export async function loader() {
+  return json({ number: Math.random() });
+}
+
 export default function Index() {
   const data = useActionData<typeof action>();
+  const loaderData = useLoaderData<typeof loader>();
   return (
     <div>
       <h1>Welcome to Remix!</h1>
@@ -26,6 +37,9 @@ export default function Index() {
           <Link to="/about">About</Link>
         </li>
       </ul>
+      {loaderData?.number && (
+        <p>{`LOADER DATA: ${JSON.stringify(loaderData)}`}</p>
+      )}
       <Form method="post">
         <input type="text" name="name" placeholder="Name" />
         <button type="submit">Submit</button>
