@@ -30,7 +30,7 @@ export default function Index() {
   return (
     <div>
       <h1>Welcome to Remix!</h1>
-      <h2>Deployed into a client account with Appius, again!</h2>
+      <h2>GitHub App Test!</h2>
       <img src="/images/react.svg" alt="react logo" width={100} />
       <ul>
         <li>
