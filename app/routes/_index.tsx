@@ -29,7 +29,7 @@ export default function Index() {
   const loaderData = useLoaderData<typeof loader>();
   return (
     <div>
-      <h1>Welcome to Remix!</h1>
+      <h1>Welcome to Remix 2!</h1>
       <h2>GitHub App Test!</h2>
       <img src="/images/react.svg" alt="react logo" width={100} />
       <ul>
